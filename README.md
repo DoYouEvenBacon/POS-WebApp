@@ -21,3 +21,7 @@ cors
 express
 mongodb
 ```
+4. Start the server.js with:
+```
+node server.js
+```
