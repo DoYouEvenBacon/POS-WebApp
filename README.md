@@ -7,3 +7,17 @@ This app is a basic example of a Point of Sales (POS) software utilising an exam
 * The latest web browser. (This web app was developed in Google Chrome.)
 * Node.js
 * [MongoDB Atlas account.](https://www.mongodb.com/cloud/atlas)
+
+## Setting Up
+1. Place the html and both JavaScript files in the same directory.
+2. Install the Node modules in the same directory with
+```
+npm install
+```
+3. Install the following dependencies with npm:
+```
+body-parser
+cors
+express
+mongodb
+```
