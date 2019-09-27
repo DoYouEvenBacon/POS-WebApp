@@ -27,3 +27,10 @@ mongodb
 node server.js
 ```
 6. The server and website should now be connected.
+## Features
+* (WIP) Make a sale.
+* Search for products in the database. Display the information for a product as well as its transaction history.
+* Add a product to the database.
+* Display the transaction history for a specified date range.
+* Search for a customer in the database. Displays their basic information (gender, age) as well as their previous transactions.
+* Upload a newsletter to send to customer's emails. Can select the age range and gender for targeted newsletters.
