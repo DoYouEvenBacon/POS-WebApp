@@ -6,7 +6,7 @@ This app is a basic example of a Point of Sales (POS) software utilising an exam
 ## Requirements
 * The latest web browser. (This web app was developed in Google Chrome.)
 * Node.js
-* [MongoDB Atlas account.](https://www.mongodb.com/cloud/atlas)
+* [MongoDB Atlas account.](https://www.mongodb.com/cloud/atlas) Make sure to load the free example cluster into your database. 
 
 ## Setting Up
 1. Place the html and both JavaScript files in the same directory.
@@ -21,7 +21,9 @@ cors
 express
 mongodb
 ```
-4. Start the server.js with:
+4. Put your MongoDB Atlas <b>CLUSTER</b> Username and Password into line 1 and 2 respectively in server.js 
+5. Start the server with:
 ```
 node server.js
 ```
+6. The server and website should now be connected.
