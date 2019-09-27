@@ -28,7 +28,7 @@ node server.js
 ```
 6. The server and website should now be connected.
 ## Features
-* (WIP) Make a sale.
+* (WIP) Make a transaction.
 * Search for products in the database. Display the information for a product as well as its transaction history.
 * Add a product to the database.
 * Display the transaction history for a specified date range.
