@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>POS Web App</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<meta charset="utf-8">
+		<style>
+			html {
+				height: 100%;
+			}
+			body {
+				background-color: #f2f2f2;
+				
+				font-family: arial;
+				height: 100%;
+				margin: 0;
+			}
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				/*table-layout: fixed;*/
+			}
+			td, th {
+				border: 1px solid #9a9a9a;
+				text-align: left;
+				padding: 8px;
+			}
+			th {
+				background-color: #2D2D2D;
+				color: #fff;
+			}
+			tr:nth-child(even) {
+				background-color: #fdfdfd;
+			}			
+			tr:nth-child(odd) {
+				background-color: #eee;
+			}
+			
+			.navBar {
+				position: fixed;
+				width: 100%;
+				top: 0;
+				background-color: #2D2D2D;
+				font-size: 20px;
+				z-index: 1000;
+			}
+			.navBar_button {
+				color: #f1f1f1;
+				font-size: 45px;
+				text-decoration: none;
+				position: relative;
+				transition-duration: 0.25s;
+			}
+			.navBar_button:hover {
+				opacity: 0.7;
+			}
+			
+			.sidenav {
+				height: 100%;
+				width: 0;
+				position: fixed;
+				z-index: 10;
+				top: 0;
+				left: 0;
+				background-color: #2D2D2D;
+				overflow-x: hidden;
+				transition: 0.5s;
+				padding-top: 60px;
+			}
+			.sidenav a {
+				text-decoration: none;
+				font-size: 25px;
+				color: #818181;
+				display: block;
+				transition: 0.3s;
+			}
+			.sidenav a:hover {
+				color: #f1f1f1;
+			}
+			.sidenav .closeMenuButton {
+				position: absolute;
+				top: 5px;
+				right: 15px;
+				font-size: 44px;
+				margin-left: 50px;
+			}
+			.MenuButton {
+				line-height: 100px;
+				text-align: center;
+			}
+			.MenuButton:hover {
+				cursor: pointer;
+				background-color: black;
+			}
+			#leftMenuPopout {
+				z-index: 1000;
+			}
+			
+			.contentPage {
+				text-align: center;
+				width: 80%;
+				padding-top: 60px;
+				margin: auto;
+			}
+			#dashboardPage {
+				display: none;
+			}
+			.dashboardSquare {
+				width: 300px;
+				height: 300px;
+				border: 1px solid black;
+				background-color: #fff;
+				margin: 10px 10px 10px 10px;
+				display: inline-block;
+				transition-duration: 0.25s;
+			}
+			.dashboardSquare:hover {
+				cursor: pointer;
+				opacity: 0.7;
+				transform: scale(1.125);
+			}
+			.dashboardFont {
+				font-size: 24px;
+			}
+			
+			#sellPage {
+				display: none;
+			}
+			#checkoutArea {
+				width: 66%;
+				float: left;
+				border: 1px solid black;
+				background-color: #fff;
+			}
+			#cartArea {
+				width: 25%;
+				float: left;
+				margin-left: 50px;
+				border: 1px solid black;
+				background-color: #fff;
+			}
+			.cartItem {
+				padding: 10px 0 10px 0;
+			}
+			.cartItem_name {
+				font-family: Oswald, sans-serif;
+				text-transform: uppercase;
+			}
+			.cartItem_remove {
+				font-size: 20px;
+			}
+			.cartItem_remove:hover {
+				cursor: pointer;
+			}
+			.cartItemSep {
+				border-top: 1px solid #e1e1e1;
+				width: 90%;
+				margin: 0 auto;
+			}
+			
+			#productsPage {
+				display: none;
+			}			
+			#productsPage_search {
+				display: block;
+			}				
+			#productsPage_results {
+				display: none;
+			}			
+			#productsPage_add {
+				display: none;
+			}
+			.loader {
+				border: 5px solid #f3f3f3;
+				animation: spin 1s cubic-bezier(0.15, 0.6, 1, 1) infinite;
+				border-top: 5px solid #555;
+				border-radius: 50%;
+				width: 50px;
+				height: 50px;
+				display: none;
+				z-index: 25;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+			
+			#historyPage {
+				display: none;
+			}			
+			#customersPage {
+				display: none;
+			}			
+			#customersPage_results {
+				display: none;
+			}
+			#newsletterPage {
+				display: none;
+			}
+			
+			.searchArea {
+				min-height: 300px;
+			}
+			
+			button {
+				padding: 10px 20px;
+				background-color: #428cb8;
+				color: #fff;
+				border: 2px solid #428cb8;
+				transition-duration: 0.25s;
+			}
+			button:hover {
+				cursor: pointer;
+				background-color: #fff;
+				color: #428cb8;
+			}
+			button:disabled {
+				cursor: default;
+				pointer-events: none;
+				opacity: 0.4;
+			}
+			
+			.autocomplete {
+				display: none;
+				width: 30.9%;
+				
+				max-height: 300px;
+				overflow-y: auto;
+				position: relative;
+				font-size: 20px;
+				background-color: #fff;
+				border-radius: 0 0 2px 2px;
+				box-shadow: 0 4px 6px 0 rgba(32,33,36,0.28);
+			}
+			input {
+				width: 30%;
+				padding-left: 10px;
+				font-size: 20px;
+				border-color: rgba(223,225,229,0);
+				box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+				border-bottom: 1px solid #e8eaed;
+			}
+			input:focus {
+				outline: none;
+			}
+			.nameContainer {
+				padding: 10px 0px 10px 0px;
+			}
+			.nameContainer:hover {
+				cursor: pointer;
+				background-color: #eee;
+			}
+			
+		</style>
+	</head>
+	
+	<body onload="openDashboard()">
+		<div class="navBar">
+			<div>
+				<a class="navBar_button" id="menuHamburger" href="#" onclick="openMenu()" style="left:10px;bottom:4px">&#9776;</a>
+				<a class="navBar_button" href="#" style="float:right;margin-right:10px;">User</a>
+			</div>
+		</div>
+		<div id="leftMenuPopout" class="sidenav">
+			<a class="closeMenuButton" href="#" onclick="closeMenu()">&times;</a>
+			<div class="menuContent">
+			<a class="MenuButton" id="dashboardButton" onclick="openDashboard()">Dashboard</a>
+			<a class="MenuButton" id="sellButton" onclick="openSell();populateItemsList()">Sell</a>
+			<a class="MenuButton" id="productsButton" onclick="openProducts()">Products</a>
+			<a class="MenuButton" id="historyButton" onclick="openHistory()">History</a>
+			<a class="MenuButton" id="customersButton" onclick="openCustomers()">Customers</a>
+			<a class="MenuButton" id="newsletterButton" onclick="openNewsletter()">Newsletter</a>
+			<!--<a class="MenuButton" id="settingsButton" onclick="">Settings</a>-->
+			</div>
+		</div>
+		<div class="contentPage" id="dashboardPage">
+			<h1>Dashboard</h1>
+			<div>
+				<div class="dashboardSquare" onclick="openSell();populateItemsList()"><p class="dashboardFont"><b>Sell</b></p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Font_Awesome_5_solid_shopping-cart.svg/200px-Font_Awesome_5_solid_shopping-cart.svg.png" width="56%"></div>
+				<div class="dashboardSquare" onclick="openProducts()"><p class="dashboardFont"><b>Products</b></p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Price_Tag_Flat_Icon_Vector.svg/240px-Price_Tag_Flat_Icon_Vector.svg.png" width="50%"></div>
+				<div class="dashboardSquare" onclick="openHistory()"><p class="dashboardFont"><b>History</b></p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Breezeicons-actions-22-view-calendar-week.svg/240px-Breezeicons-actions-22-view-calendar-week.svg.png" width="50%"></div>
+				<div class="dashboardSquare" onclick="openCustomers()"><p class="dashboardFont"><b>Customers</b></p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/240px-OOjs_UI_icon_userAvatar.svg.png" width="50%"></div>
+				<div class="dashboardSquare" onclick="openNewsletter()"><p class="dashboardFont"><b>Newsletter</b></p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Ic_mail_outline_black_48px.svg/240px-Ic_mail_outline_black_48px.svg.png" width="50%"></div>
+				<!--<div class="dashboardSquare"><p class="dashboardFont"><b>Settings</b></p><img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Font_Awesome_5_solid_cog.svg" width="50%"></div>-->
+				
+			</div>
+		</div>
+		<div class="contentPage" id="sellPage">
+			<h1>Sell Page</h1>
+			<div style="overflow:hidden">
+				<div id="checkoutArea">
+					<div>
+						<div style="padding:10px">
+							<h2>Customer Info</h2>
+							<div>
+								<label><span>Email Address:</span></label>
+								<input style="border-color:#d9d9d9;border: 1px transparent solid">
+							</div>							
+							<div>
+							</div>
+						</div>						
+						<div style="padding:10px">
+							<h2>Add Products to the Cart</h2>
+							<div>
+								<label><span>Product:</span></label>
+								<select id="checkoutItemsList" style="padding: 4px 15px;font-size: 18px;"></select>
+								<label style="padding-left:20px"><span>Qty:</span></label>
+								<input id="checkoutItemsQty" type="number" style="width:75px;height:25px;font-size:18px;border-color:#d9d9d9;border: 1px transparent solid;" min="1" max="100" value="1"/>
+								<label style="padding-left:20px"><span>Price per Unit: $</span></label>
+								<input id="checkoutItemsPrice" type="number" style="width:75px;height:25px;font-size:18px;border-color:#d9d9d9;border: 1px transparent solid;" min="0.00" value="0.00" step="0.01"/>
+								<button onclick="addItemToCart()">Add</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<aside id="cartArea">
+					<div>
+						<div>
+							<h2>Cart</h2>
+						</div>
+						<div class="cartItemSep">
+						</div>
+						<div id="cartItemsList">
+						</div>
+						<div style="padding:10px">
+							<div id="orderTotal"><h3>Order Total: $0.00</h3></div>
+							<button id="checkoutButton" disabled>Checkout</button>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+		<div class="contentPage" id="productsPage">
+			<div id="productsPage_search">
+				<h1>Product Search</h1>
+				<div class="searchArea">
+					<div>
+						<input id="productSearchInput" onkeyup="liveProductSearch()" autocomplete="off" size="38" autofocus>
+					</div>
+					<div class="autocomplete" id="autocomplete" style=""></div>				
+				</div>	
+				<h2>or:</h2>
+				<div>
+					<button onclick="openAddProducts()" style="padding:10px 65px;">Add a Product</button>
+				</div>
+			</div>
+			
+			<div id="productsPage_results">
+				<div style="margin-top:15px;">
+					<button id="backTo_productsPage_search" onclick="backToProductsSearch()">&#10094; Back to Product Search</button>
+				</div>
+				<div style="margin-top:15px;border:1px solid black;padding:10px 0px;position:relative">
+					<button style="position:absolute;left:10px;">Edit Product</button>
+					<button style="visibility:hidden">Unused</button>
+					<button style="position:absolute;right:10px;">Delete Product</button>
+				</div>
+				<div id="productResultsArea">
+					<div id="productInfoArea">
+						<div id="productInfo_content">
+						</div>
+					</div>			
+					<div id="productHistoryArea">
+						<h2>Product History</h2>
+						<div id="productHistoryArea_select" style="margin-bottom:10px">
+							<div>
+								Start: <input type="date" id="productDate_start" value="2015-01-01">
+								End: <input type="date" id="productDate_end" value="2016-01-01">
+								<button id="productHistory_button" style="padding: 10px 15px 5px 15px;" value="DESC" onclick="getProductHistory(event)">Go</button>
+							</div>
+							<div style="padding-top:10px">
+								Sort:
+								<select id="productHistory_sort" onchange="getProductHistory(event)" style="font-size:20px">
+									<option value="DESC">Date (Newest)</option>
+									<option value="ASC">Date (Oldest)</option>
+								</select>
+							</div>
+						</div>
+						<div id="productsTable_loader" class="loader"></div>
+						<div id="productsTable_container" style="overflow-x:auto;overflow-y:auto;max-height:491px">
+							<table id="productHistoryArea_table">
+								<thead>
+									<tr>
+										<th>Date (UTC)</th>
+										<th>Customer</th>
+										<th>Store Location</th>
+										<th>In store/Online</th>
+										<th>Net Price</th>
+										<th>Quantity</th>
+									</tr>
+								</thead>
+								<tbody id="productTableBody">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<div id="productsPage_add">
+				<div style="margin-top:15px;">
+					<button id="backTo_productsPage_search" onclick="backToProductsSearch()">&#10094; Back to Product Search</button>
+				</div>
+				<h1>Add a Product</h1>
+				<div>
+					<div>
+						<div>Product Name:</div>
+						<input id="addProductInput_name">
+					</div>
+					<div style="margin-top:15px">
+						<div>Product Tags: (Separate each tag with a comma)</div>
+						<input id="addProductInput_tags">
+					</div>
+					<div style="margin-top:15px">
+						<button onclick="addProduct()">Add Product</button>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="contentPage" id="historyPage">
+			<h1>Transaction History</h1>
+			<div id="transactionHistoryArea">
+				<div id="transactionHistoryArea_select" style="margin-bottom:10px">
+					<div>
+						Start: <input type="date" id="transactionDate_start" value="2015-01-01">
+						End: <input type="date" id="transactionDate_end" value="2016-01-01">
+						<button id="transactionHistory_button" style="padding: 10px 15px 5px 15px;" value="DESC" onclick="getTransactionHistory(event)">Go</button>
+					</div>
+					<div style="padding-top:10px">
+						Sort:
+						<select id="transactionHistory_sort" onchange="getTransactionHistory(event)" style="font-size:20px">
+							<option value="DESC">Date (Newest)</option>
+							<option value="ASC">Date (Oldest)</option>
+						</select>
+						<!--
+						Filter:
+						<select id="transactionHistory_filter" onchange="getTransactionHistory(event)" style="font-size:20px">
+							<option value="ALLSTORES">Stores: All</option>
+							<option value="AUSTIN">Stores: Austin</option>
+							<option value="DENVER">Stores: Denver</option>
+							<option value="LONDON">Stores: London</option>
+							<option value="NEWYORK">Stores: New York</option>
+							<option value="SANDIEGO">Stores: San Diego</option>
+							<option value="SEATTLE">Stores: Seattle</option>
+						</select>
+						-->
+					</div>
+				</div>
+				<div id="transactionHistoryTable_container" style="max-height:491px;overflow-y:auto;">
+					<table id="transactionHistoryArea_table">
+						<thead>
+							<tr>
+								<th>Date (UTC)</th>
+								<th>Customer</th>
+								<th>Store Location</th>
+								<th>In store/Online</th>
+								<th>Products</th>
+								<th>Quantity</th>
+								<th>Net Price</th>
+								<th>Transaction Total</th>
+							</tr>
+						</thead>
+						<tbody id="transactionHistoryTableBody">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="contentPage" id="customersPage">
+			<div id="customersPage_search">
+				<h1>Customers Search</h1>
+				<div class="searchArea">
+					<div>
+						<input id="customerSearchInput" autocomplete="off" size="38" autofocus>
+					</div>
+					<button onclick="customerSearch()" style="margin-top:10px;">Search</button>
+				</div>	
+			</div>
+			<div id="customersPage_results">
+				<div style="margin-top:15px;">
+					<button id="backTo_customersPage_search" onclick="backToCustomersSearch()">&#10094; Back to Customers Search</button>
+				</div>
+				<div style="margin-top:15px;border:1px solid black;padding:10px 0px;position:relative">
+					<button style="position:absolute;left:10px;">Edit Customer</button>
+					<button style="visibility:hidden">Unused</button>
+					<button style="position:absolute;right:10px;">Delete Customer</button>
+				</div>
+				<div id="customerResultsArea">
+					<div id="customerInfoArea">
+						<table id="customerInfo_content" style="width:30%;margin: 0 auto;margin-top:15px;">
+						</table>
+					</div>					
+					<div id="customerHistoryArea">
+						<h2>Transaction History</h2>
+						<table id="customerHistory_content">
+						</table>					
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="contentPage" id="newsletterPage">
+			<h1>Send a Newsletter to Customers</h1>
+			<div>
+				<h3>Upload and Email a Newsletter</h3>
+				<div>
+					<input type="file" id="newsletterUpload">
+				</div>
+				<div>
+					<div style="margin-top:15px;">
+						<div>Select Minimum Target Age</div><input type="number" id="ageSelectorMin" min="1" max="110" value="1" style="width:100px;">
+					</div>
+					<div style="margin-top:15px;">
+						<div>Select Maximum Target Age</div><input type="number" id="ageSelectorMax" min="1" max="110" value="110" style="width:100px;">
+					</div>
+					<div style="margin-top:15px;">
+						<div>Select Gender</div>
+						<select id="genderSelector" style="font-size:20px;width:116px;height:30px;">
+							<option value="all">All</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>	
+					</div>
+					<div style="margin-top:15px;">
+						<button id="sendNewsletterButton" onclick="sendNewsletter()">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="loadingCircle" class="loader">
+		</div>
+	</body>
+	<script type="text/javascript" src="salesSoftware.js"></script>
+</html>
