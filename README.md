@@ -43,7 +43,7 @@ node server.js
 <br/><br/>
 - Navigate to different pages using the dashboard or the menu on the left.
 ![2_interactive](https://user-images.githubusercontent.com/45221821/66277239-17c79500-e8f8-11e9-93b7-c83709cfc7b0.PNG)
-<br>
+<br/>
 ![2_1leftMenu](https://user-images.githubusercontent.com/45221821/66277356-9ffa6a00-e8f9-11e9-9226-9a3ca64088fb.PNG)
 <br/><br/><br/>
 - Search for a product in the database.
