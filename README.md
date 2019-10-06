@@ -11,7 +11,7 @@ The example cluster should look something like this:
 ![mongo](https://user-images.githubusercontent.com/45221821/66277540-71ca5980-e8fc-11e9-889d-58d269821051.PNG)
 
 ## Setting Up
-1. Place the html and both JavaScript files in the same directory.
+1. Place the HTML and both JavaScript files in the same directory.
 2. Install the Node modules in the same directory with
 ```
 npm install
