@@ -28,7 +28,7 @@ node server.js
 ```
 6. The server and website should now be connected.
 ## Features
-* Make a transaction.
+* Make a transaction. (To do: Commit transaction to the database.)
 * Search for products in the database. Display the information for a product as well as its transaction history.
 * Add a product to the database.
 * (WIP) Edit and delete a product from the database.
