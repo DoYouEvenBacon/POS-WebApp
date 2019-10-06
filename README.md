@@ -44,6 +44,12 @@ node server.js
 - Navigate to different pages using the dashboard or the menu on the left.
 ![2_interactive](https://user-images.githubusercontent.com/45221821/66277239-17c79500-e8f8-11e9-93b7-c83709cfc7b0.PNG)
 <br/><br/><br/>
+![sellPage](https://user-images.githubusercontent.com/45221821/66277436-22cff480-e8fb-11e9-925f-f250ac2d7656.PNG)
+![addItemtoCart](https://user-images.githubusercontent.com/45221821/66277437-2499b800-e8fb-11e9-9599-3880ef6c541b.PNG)
+![cartResult](https://user-images.githubusercontent.com/45221821/66277438-26637b80-e8fb-11e9-9184-87c6b2f612fa.PNG)
+- Change the items in the cart with changes reflected in real-time. 
+![dynamicCart](https://user-images.githubusercontent.com/45221821/66277440-282d3f00-e8fb-11e9-8de6-453cf0ad782b.PNG)
+<br/><br/><br/>
 - Search for a product in the database.
 ![3_productSearch](https://user-images.githubusercontent.com/45221821/66277240-1a29ef00-e8f8-11e9-9647-2599af75e22e.PNG)
 <br/><br/>
