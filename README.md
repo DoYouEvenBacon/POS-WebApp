@@ -7,6 +7,8 @@ This app is a basic example of a Point of Sales (POS) software utilising an exam
 * The latest web browser. (This web app was developed in Google Chrome.)
 * Node.js
 * [MongoDB Atlas account.](https://www.mongodb.com/cloud/atlas) Make sure to load the free example cluster into your database. 
+The example cluster should look something like this:
+![mongo](https://user-images.githubusercontent.com/45221821/66277540-71ca5980-e8fc-11e9-889d-58d269821051.PNG)
 
 ## Setting Up
 1. Place the html and both JavaScript files in the same directory.
