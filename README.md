@@ -41,7 +41,10 @@ node server.js
 - The Dashboard of the web app
 ![1_dashboard](https://user-images.githubusercontent.com/45221821/66277237-15653b00-e8f8-11e9-9656-3ff731f738aa.PNG)
 <br/><br/>
+- Navigate to different pages using the dashboard or the menu on the left.
 ![2_interactive](https://user-images.githubusercontent.com/45221821/66277239-17c79500-e8f8-11e9-93b7-c83709cfc7b0.PNG)
+<br>
+![2_1leftMenu](https://user-images.githubusercontent.com/45221821/66277356-9ffa6a00-e8f9-11e9-9226-9a3ca64088fb.PNG)
 <br/><br/><br/>
 - Search for a product in the database.
 ![3_productSearch](https://user-images.githubusercontent.com/45221821/66277240-1a29ef00-e8f8-11e9-9647-2599af75e22e.PNG)
