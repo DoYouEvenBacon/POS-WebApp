@@ -36,3 +36,33 @@ node server.js
 * Search for a customer in the database. Displays their basic information (gender, age) as well as their previous transactions.
 * Upload a newsletter to send to customer's emails. Can select the age range and gender for targeted newsletters.
 * (To do: Add login authentication.)
+
+## Images of the Web App
+- The Dashboard of the web app
+![1_dashboard](https://user-images.githubusercontent.com/45221821/66277237-15653b00-e8f8-11e9-9656-3ff731f738aa.PNG)
+<br/><br/>
+![2_interactive](https://user-images.githubusercontent.com/45221821/66277239-17c79500-e8f8-11e9-93b7-c83709cfc7b0.PNG)
+<br/><br/><br/>
+- Search for a product in the database.
+![3_productSearch](https://user-images.githubusercontent.com/45221821/66277240-1a29ef00-e8f8-11e9-9647-2599af75e22e.PNG)
+<br/><br/>
+- View product info including tags and the sale history of the product.
+![4_productInfo](https://user-images.githubusercontent.com/45221821/66277242-1e560c80-e8f8-11e9-9be4-6ccc660ba2e0.PNG)
+<br/><br/><br/>
+- Add a new product to the database.
+![5_addProduct](https://user-images.githubusercontent.com/45221821/66277243-20b86680-e8f8-11e9-907a-823d527f676b.PNG)
+<br/><br/>
+- The new product is now searchable.
+![6_newProductSearch](https://user-images.githubusercontent.com/45221821/66277244-244bed80-e8f8-11e9-8f39-e995f9bf86b3.PNG)
+<br/><br/><br/>
+- View all transactions during a specific time period.
+![7_transactionHistory](https://user-images.githubusercontent.com/45221821/66277247-2615b100-e8f8-11e9-835b-16cb9d6dfe4a.PNG)
+<br/><br/><br/>
+- Search for a customer in the database.
+![8_customerSearch](https://user-images.githubusercontent.com/45221821/66277249-27df7480-e8f8-11e9-9869-e3cd71a7639a.PNG)
+<br/><br/>
+- Display customer info including their purchases.
+![9_customerInfo](https://user-images.githubusercontent.com/45221821/66277250-29a93800-e8f8-11e9-9688-aaf04984c89c.PNG)
+<br/><br/><br/>
+- Send targeted newsletters. (Doesn't actually work because the emails in the database are fake, but the function does accept files and selects the right customers based on the parameters.)
+![10_sendNewsletter](https://user-images.githubusercontent.com/45221821/66277252-2b72fb80-e8f8-11e9-8520-b40522dd3279.PNG)
