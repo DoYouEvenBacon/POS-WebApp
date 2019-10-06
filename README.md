@@ -35,4 +35,4 @@ node server.js
 * Display the transaction history for a specified date range.
 * Search for a customer in the database. Displays their basic information (gender, age) as well as their previous transactions.
 * Upload a newsletter to send to customer's emails. Can select the age range and gender for targeted newsletters.
-<br/>* (To do: Add login authentication.)
+* (To do: Add login authentication.)
