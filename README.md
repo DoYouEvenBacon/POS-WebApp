@@ -69,6 +69,9 @@ node server.js
 <br/><br/>
 - View product info including tags and the sale history of the product.
 ![4_productInfo](https://user-images.githubusercontent.com/45221821/66277242-1e560c80-e8f8-11e9-9be4-6ccc660ba2e0.PNG)
+<br/><br/>
+- Delete the product from the database.
+![4_deleteProduct](https://user-images.githubusercontent.com/45221821/67177435-0075c500-f42b-11e9-9ac9-d2cb05f431e9.PNG)
 <br/><br/><br/>
 - Add a new product to the database.
 ![5_addProduct](https://user-images.githubusercontent.com/45221821/66277243-20b86680-e8f8-11e9-907a-823d527f676b.PNG)
