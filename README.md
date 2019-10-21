@@ -33,10 +33,10 @@ node server.js
 * Make a transaction. (To do: Commit transaction to the database.)
 * Search for products in the database. Display the information for a product as well as its transaction history.
 * Add a product to the database.
-* (WIP) Edit and delete a product from the database.
+* Delete a product from the database.
 * Display the transaction history for a specified date range.
 * Search for a customer in the database. Displays their basic information (gender, age) as well as their previous transactions.
-* Upload a newsletter to send to customer's emails. Can select the age range and gender for targeted newsletters.
+* Upload a newsletter to send to customer's emails. Can select the age range and gender for targeted newsletters. (This exmaple database uses fake emails.)
 * (To do: Add login authentication.)
 
 ## Images of the Web App
