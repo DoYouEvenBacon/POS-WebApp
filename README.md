@@ -23,7 +23,7 @@ cors
 express
 mongodb
 ```
-4. Put your MongoDB Atlas <b>CLUSTER</b> Username and Password into line 1 and 2 respectively in server.js 
+4. Put your MongoDB Atlas <b>CLUSTER</b> Username and Password into line 1 and 2 respectively in <b>server.js</b> 
 5. Start the server with:
 ```
 node server.js
