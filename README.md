@@ -59,7 +59,7 @@ node server.js
 ![sellPage](https://user-images.githubusercontent.com/45221821/66277436-22cff480-e8fb-11e9-925f-f250ac2d7656.PNG)
 - Create a transaction by adding products to the cart.
 ![addItemtoCart](https://user-images.githubusercontent.com/45221821/66277437-2499b800-e8fb-11e9-9599-3880ef6c541b.PNG)
-- View of the cart.
+- View of the cart.<br/>
 ![cartResult](https://user-images.githubusercontent.com/45221821/66277438-26637b80-e8fb-11e9-9184-87c6b2f612fa.PNG)
 - Edit the items in the cart with changes reflected in real-time. 
 ![dynamicCart](https://user-images.githubusercontent.com/45221821/66277440-282d3f00-e8fb-11e9-8de6-453cf0ad782b.PNG)
