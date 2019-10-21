@@ -32,7 +32,7 @@ cors
 express
 mongodb
 ```
-4. Put your MongoDB Atlas <b>CLUSTER</b> Username and Password into line 1 and 2 respectively in <b>server.js</b> 
+4. Put your MongoDB Atlas <b>CLUSTER</b> Username and Password into line 1 and 2 respectively in <b>server.js</b><br/>Make sure you have the 'samples_sales' database loaded and have added a collection called 'products' with the products listed above in the requirements. An alternative way is to add the products using the Add Product functionality in the web app.
 5. Start the server with:
 ```
 node server.js
