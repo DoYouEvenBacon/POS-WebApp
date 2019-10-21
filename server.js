@@ -310,8 +310,17 @@ router.post('/products/addProduct', (req, res) => { // /addProduct
 		if(err) throw err;
 		res.send(`Product with name '${productName}' and tags '${productTagsArray}' has been added.`);
 	});
+});
+
+router.delete('/products/deleteProduct', (req, res) => { // /addProduct
+	let productName = req.body.name;
+	let deleteQuery = {name: productName};
 	
-	
+	client.db('sample_supplies').collection('products')
+	.deleteOne(deleteQuery, (err, result) =>{
+		if(err) throw err;
+		res.send(`Product with name '${productName}' has been deleted.`);
+	});
 });
 
 app.use('/api', router); //localhost:port/api/.../:...

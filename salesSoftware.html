@@ -327,7 +327,7 @@
 						</div>
 						<div style="padding:10px">
 							<div id="orderTotal"><h3>Order Total: $0.00</h3></div>
-							<button id="checkoutButton" disabled>Checkout</button>
+							<button id="checkoutButton" onclick="createTransaction()" disabled>Checkout</button>
 						</div>
 					</div>
 				</aside>
@@ -335,14 +335,14 @@
 		</div>
 		<div class="contentPage" id="productsPage">
 			<div id="productsPage_search">
-				<h1>Product Search</h1>
+				<h2>Search Existing Products</h2>
 				<div class="searchArea">
 					<div>
 						<input id="productSearchInput" onkeyup="liveProductSearch()" autocomplete="off" size="38" autofocus>
 					</div>
 					<div class="autocomplete" id="autocomplete" style=""></div>				
 				</div>	
-				<h2>or:</h2>
+				<h2>Add New Products</h2>
 				<div>
 					<button onclick="openAddProducts()" style="padding:10px 65px;">Add a Product</button>
 				</div>
@@ -355,7 +355,7 @@
 				<div style="margin-top:15px;border:1px solid black;padding:10px 0px;position:relative">
 					<button style="position:absolute;left:10px;">Edit Product</button>
 					<button style="visibility:hidden">Unused</button>
-					<button style="position:absolute;right:10px;">Delete Product</button>
+					<button id="productDeleteButton" style="position:absolute;right:10px;">Delete Product</button>
 				</div>
 				<div id="productResultsArea">
 					<div id="productInfoArea">

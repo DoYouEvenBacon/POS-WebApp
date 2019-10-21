@@ -60,6 +60,8 @@ function backToProductsSearch() {
 	document.getElementById('productsPage_search').style.display = 'block';
 	document.getElementById('productsPage_results').style.display = 'none';
 	document.getElementById('productsPage_add').style.display = 'none';
+	document.getElementById('productSearchInput').value = '';
+	document.getElementById('autocomplete').style.display = 'none';
 };
 
 function backToCustomersSearch() {
@@ -216,6 +218,10 @@ const updateItemInCart = (event) =>{
 	}
 };
 
+const createTransaction = () =>{
+	console.log();
+};
+
 //Products page functions
 const liveProductSearch = () =>{
 	let searchString = document.getElementById('productSearchInput').value;
@@ -274,14 +280,38 @@ const getProductInfo = (event) =>{
 	xhr.onreadystatechange = () =>{
 		if(xhr.readyState === XMLHttpRequest.DONE){
 			console.log(JSON.parse(xhr.response));
-			formatProductInfo(JSON.parse(xhr.response));
+			formatProductInfo(JSON.parse(xhr.response), productName);
 		}
 	};
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.send();		
 };
 
-const formatProductInfo = (productInfo) =>{
+const deleteProduct = (event) =>{
+	const productName = event.currentTarget.parentNode.parentNode.dataset.name;
+	
+	let deleteConfirm = confirm(`Are you sure you want to delete the product '${productName}'?`);
+	if(deleteConfirm === true){
+		const xhr = new XMLHttpRequest();
+		const url = `http://localhost:8000/api/products/deleteProduct`;
+		xhr.open("DELETE", url, true);
+		xhr.onreadystatechange = () =>{
+			if(xhr.readyState === XMLHttpRequest.DONE){
+				alert(xhr.response); //alert: product deleted
+				backToProductsSearch();
+			}
+		};
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.send(`name=${productName}`);			
+	}
+};
+
+const formatProductInfo = (productInfo, productName) =>{
+	document.getElementById('productsPage_results').dataset.name = productName;
+	//addeventlistener to delete button
+	//document.getElementById('productDeleteButton').removeEventListener('click', deleteProduct);
+	document.getElementById('productDeleteButton').addEventListener('click', deleteProduct);
+	
 	let tagsString = '';
 	productInfo.result[0].tags.forEach((tag) =>{
 		tagsString += `<a href='#' class='productTag'>${tag}</a> `;
