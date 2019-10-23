@@ -141,6 +141,7 @@ const addItemToCart = () =>{
 		let text_remove = document.createTextNode('× Remove Item');
 
 		cartItem_name.appendChild(nameHeading);
+		cartItem_name.dataset.name = itemName;
 		cartItem_price.appendChild(priceHeading);
 		cartItem_price.dataset.price = itemUnitPrice; //store price as html data so it can be used for calculation when editing cart quantity
 		cartItem_qty.appendChild(qtyInput);
@@ -219,7 +220,62 @@ const updateItemInCart = (event) =>{
 };
 
 const createTransaction = () =>{
-	console.log();
+	let cartElement = document.getElementById('cartItemsList');
+	
+	//array to hold collections of items from the cart
+	let itemsArray = [];
+	cartElement.childNodes.forEach((node) =>{
+		if(node.nodeType != 3){ //skip the empty text node
+			//create object for each product in the cart and store in an array
+			let productName = node.childNodes[0].dataset.name;
+			let productQty = parseInt(node.childNodes[2].dataset.qty);
+			let productSubtotal = node.childNodes[3].dataset.subtotal; //Keep as a string and use mongo NumberDecimal() function in server
+
+			let itemObject = {
+				name: productName,
+				tags: [],
+				price: productSubtotal,
+				quantity: productQty
+			};
+			itemsArray.push(itemObject);
+		} 
+	});
+	let custObject = {};
+	let custEmail = null;
+	if(document.getElementById('cartCustomerEmail').value.trim() != ''){
+		custEmail = document.getElementById('cartCustomerEmail').value.trim();
+	}
+	custObject.gender = 'none';
+	custObject.age = 'none';
+	custObject.email = custEmail;
+	custObject.satisfaction = 'none';
+	
+	//send transaction to the server
+	const xhr = new XMLHttpRequest();
+	const url = `http://localhost:8000/api/transaction`;
+	xhr.open("POST", url, true);
+	xhr.onreadystatechange = () =>{
+		if(xhr.readyState === XMLHttpRequest.DONE){
+			alert(xhr.response); //alert: transaction successful!
+			afterTransaction();//Clear checkout display and input fields
+		}
+	};
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send(`items=${JSON.stringify(itemsArray)}&cust=${JSON.stringify(custObject)}`);	
+};
+
+const afterTransaction = () =>{ //clear cart and input fields, reset order total, disable checkout button
+	let cartNode = document.getElementById('cartItemsList');
+	while(cartNode.lastChild){ //remove items from the cart
+		cartNode.removeChild(cartNode.lastChild);
+	}
+	orderTotal = 0;
+	document.getElementById('orderTotal').innerHTML = `<h3>Order Total: $${orderTotal.toFixed(2)}</h3>`;
+	if(document.getElementById('cartItemsList').childNodes.length === 0){ //if cart is empty
+		document.getElementById('checkoutButton').disabled = true;
+	}	
+	document.getElementById('cartCustomerEmail').value = '';
+	
 };
 
 //Products page functions
@@ -452,8 +508,8 @@ const getTransactionHistory = (event) =>{
 	sortOrder = document.getElementById('transactionHistory_sort').value;
 	//filter = document.getElementById('transactionHistory_filter').value;
 	
-	let startDate = document.getElementById('productDate_start').value;
-	let endDate = document.getElementById('productDate_end').value;
+	let startDate = document.getElementById('transactionDate_start').value;
+	let endDate = document.getElementById('transactionDate_end').value;
 	let startYear = startDate.slice(0, 4);
 	let startMonth = startDate.slice(5, 7);
 	let startDay = startDate.slice(8);	
