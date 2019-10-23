@@ -3,6 +3,7 @@ const mongoPassword = ''; //your password here
 const port = 8000;
 
 //require mongodb and express
+const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const app = express();
@@ -218,7 +219,7 @@ router.get('/products/allInfo', (req, res) => { //return a list of all products 
 	}
 });
 
-router.get('/products/productHistory/:productName', (req, res) => { // /products/productHistory/:productName?startday=xx&startmonth=xx&startyear=xxxx&endday=xx&endmonth=xx&endyear=xxxx$sort=
+router.get('/products/productHistory/:productName', (req, res) =>{ // /products/productHistory/:productName?startday=xx&startmonth=xx&startyear=xxxx&endday=xx&endmonth=xx&endyear=xxxx$sort=
 	let productName = req.params.productName;
 	//start and end dates reused from /periodReport
 	if(typeof req.query.startday !== 'undefined' && typeof req.query.startmonth !== 'undefined' && typeof req.query.startyear !== 'undefined'
@@ -299,11 +300,14 @@ router.get('/products/productHistory/:productName', (req, res) => { // /products
 	}
 });
 
-router.post('/products/addProduct', (req, res) => { // /addProduct
+router.post('/products/addProduct', (req, res) =>{ // /addProduct
 	let productName = req.body.name;
 	let productTags = req.body.tags;
 	let productTagsArray = productTags.split(',');
-	let newProduct = {name: productName, tags: productTagsArray};
+	let newProduct = {
+		name: productName,
+		tags: productTagsArray
+	};
 	
 	client.db('sample_supplies').collection('products')
 	.insertOne(newProduct, (err, result) =>{
@@ -312,14 +316,41 @@ router.post('/products/addProduct', (req, res) => { // /addProduct
 	});
 });
 
-router.delete('/products/deleteProduct', (req, res) => { // /addProduct
+router.delete('/products/deleteProduct', (req, res) =>{ // /addProduct
 	let productName = req.body.name;
-	let deleteQuery = {name: productName};
+	let deleteQuery = {
+		name: productName
+	};
 	
 	client.db('sample_supplies').collection('products')
 	.deleteOne(deleteQuery, (err, result) =>{
 		if(err) throw err;
 		res.send(`Product with name '${productName}' has been deleted.`);
+	});
+});
+
+router.post('/transaction', (req, res) =>{
+	let itemsArray = JSON.parse(req.body.items);
+	let custObject = JSON.parse(req.body.cust);
+	
+	itemsArray.forEach((item) => { //convert string representation of price to decimal128
+		item.price = mongodb.Decimal128.fromString(item.price);
+	});
+	//console.log(itemsArray);
+	
+	let newTran = {
+		saleDate: new Date(),
+		items: itemsArray,
+		storeLocation: 'exampleStore',
+		customer: custObject,
+		couponUsed: false,
+		purchaseMethod: 'In store'
+	};
+	
+	client.db('sample_supplies').collection('sales')
+	.insertOne(newTran, (err, result) =>{
+		if(err) throw err;
+		res.send(`Transaction Successful!`);
 	});
 });
 
