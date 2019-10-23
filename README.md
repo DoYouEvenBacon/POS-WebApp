@@ -39,7 +39,7 @@ node server.js
 ```
 6. The server and website should now be connected.
 ## Features
-* Make a transaction. (To do: Commit transaction to the database.)
+* Make a transaction.
 * Search for products in the database. Display the information for a product as well as its transaction history.
 * Add a product to the database.
 * Delete a product from the database.
@@ -63,6 +63,11 @@ node server.js
 ![cartResult](https://user-images.githubusercontent.com/45221821/66277438-26637b80-e8fb-11e9-9184-87c6b2f612fa.PNG)
 - Edit the items in the cart with changes reflected in real-time. 
 ![dynamicCart](https://user-images.githubusercontent.com/45221821/66277440-282d3f00-e8fb-11e9-8de6-453cf0ad782b.PNG)
+<br/><br/>
+- Create a sales transaction.
+![createTransaction](https://user-images.githubusercontent.com/45221821/67356552-f84a9080-f5b6-11e9-8a7f-2944a91b16f4.PNG)
+- The sales transaction is stored in the database.
+![viewTransaction](https://user-images.githubusercontent.com/45221821/67356556-faacea80-f5b6-11e9-9072-ae02d7f9fc64.PNG)
 <br/><br/><br/>
 - Search for a product in the database.
 ![3_productSearch](https://user-images.githubusercontent.com/45221821/66277240-1a29ef00-e8f8-11e9-9647-2599af75e22e.PNG)
